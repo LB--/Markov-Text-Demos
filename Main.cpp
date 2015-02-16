@@ -1,8 +1,10 @@
 #include "CharacterGenerator.hpp"
+#include "WordGenerator.hpp"
 
 #include <fstream>
 #include <iostream>
 #include <limits>
+#include <memory>
 #include <sstream>
 #include <string>
 
@@ -11,12 +13,28 @@ int main(int, char const *const *)
 	std::string line;
 	do
 	{
+		std::cout
+			<< "Available Markov-chain generators:" << std::endl
+			<< "1 - simple character-based" << std::endl
+			<< "2 - simple word-based" << std::endl;
+		int num;
+		while((std::cout << "Pick one: ") && std::getline(std::cin, line) && (!(std::istringstream{line} >> num) || (num != 1 && num != 2)))
+		{
+		}
 		int order;
 		while((std::cout << "Order of generator: ") && std::getline(std::cin, line) && (!(std::istringstream{line} >> order) || order <= 0))
 		{
-			std::cin.clear();
 		}
-		CharacterGenerator g {static_cast<std::size_t>(order)};
+		auto gp = std::unique_ptr<Generator>{nullptr};
+		if(num == 1)
+		{
+			gp.reset(new CharacterGenerator{static_cast<std::size_t>(order)});
+		}
+		else if(num == 2)
+		{
+			gp.reset(new WordGenerator{static_cast<std::size_t>(order)});
+		}
+		Generator &g = *gp;
 		std::cout << "Enter some text, a filename, or leave blank for default:" << std::endl;
 		std::getline(std::cin, line);
 		if(line.empty())

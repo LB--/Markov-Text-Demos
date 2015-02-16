@@ -6,5 +6,6 @@
   <ItemGroup>
     <ClInclude Include="Generator.hpp" />
     <ClInclude Include="CharacterGenerator.hpp" />
+    <ClInclude Include="WordGenerator.hpp" />
   </ItemGroup>
 </Project>

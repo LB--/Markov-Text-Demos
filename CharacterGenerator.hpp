@@ -3,6 +3,7 @@
 
 #include "Generator.hpp"
 
+#include <cctype>
 #include <deque>
 #include <iterator>
 #include <map>
@@ -29,6 +30,11 @@ private:
 		std::string::value_type c;
 		while(s.read(&c, 1))
 		{
+			if(c == '\n')
+			{
+				continue;
+			}
+			c = static_cast<std::string::value_type>(std::tolower(static_cast<unsigned char>(c)));
 			recent.push_back(c);
 			if(recent.size() > order)
 			{

@@ -69,6 +69,7 @@
   <ItemGroup>
     <ClInclude Include="CharacterGenerator.hpp" />
     <ClInclude Include="Generator.hpp" />
+    <ClInclude Include="WordGenerator.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
